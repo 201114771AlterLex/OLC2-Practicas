@@ -1,0 +1,67 @@
+package Analizadores;
+
+import java_cup.runtime.*;
+
+
+parser code{:
+
+
+       int High;
+       int Low;
+
+        public void syntax_error(Symbol s){
+            System.out.println("Error en la Linea " + (s.left) +" Columna "+s.right+ " Identificador '" +s.value + " 'no reconocido." );
+	 }
+
+        public void unrecovered_syntax_error(Symbol s)throws Exception{
+            System.out.println("\n Error Sintactico "+s);
+        }
+
+        public void report_error(String message, Object info){
+            //System.out.println(message);
+            //Symbol s=(Symbol)info;
+            //System.out.println(s.value);
+        }
+
+
+:};
+
+init with {: 
+   High=0;
+   Low=0;
+:};
+
+action code
+	{:
+            
+
+
+
+	:};
+
+terminal int   Zero,Uno;
+
+non terminal S;
+non terminal I,V;
+
+start with 	S;
+
+S::=I
+    {:
+        System.out.println(High+" veces 1");
+        System.out.println(Low+ " veces 0");
+        System.out.println("Completed");
+    :}
+;
+
+I::=I V
+    |V
+;
+V::=Zero{:
+        Low++;
+    :}
+    |Uno
+    {:
+        High++;
+    :}
+;

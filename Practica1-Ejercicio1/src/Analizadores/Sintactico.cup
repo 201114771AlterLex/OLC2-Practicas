@@ -1,0 +1,70 @@
+package Analizadores;
+
+import java_cup.runtime.*;
+
+
+parser code{:
+
+
+       
+
+        public void syntax_error(Symbol s){
+            System.out.println("Error en la Linea " + (s.left) +" Columna "+s.right+ " Identificador '" +s.value + " 'no reconocido." );
+	 }
+
+        public void unrecovered_syntax_error(Symbol s)throws Exception{
+            System.out.println("\n Error Sintactico "+s);
+        }
+
+        public void report_error(String message, Object info){
+            //System.out.println(message);
+            //Symbol s=(Symbol)info;
+            //System.out.println(s.value);
+        }
+
+
+:};
+
+init with {: 
+   
+:};
+
+action code
+	{:
+            
+
+
+
+	:};
+
+terminal String   Id,Coma;
+
+non terminal String S;
+non terminal String I,L;
+
+start with 	S;
+
+S::=I
+    {:
+        System.out.println("Completed");
+    :}
+;
+
+I::=Id:a Coma L
+    {:
+        System.out.println(a);
+    :}
+    |Id:a
+    {:
+        System.out.println(a);
+    :}
+;
+L::=L Coma Id:a
+    {:
+       System.out.print(a+" , ");
+    :}
+    |Id:a
+    {:
+        System.out.print(a+" , ");
+    :}
+;
