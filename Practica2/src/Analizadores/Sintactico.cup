@@ -1,0 +1,80 @@
+package Analizadores;
+
+import java_cup.runtime.*;
+import Analizadores.Data;
+
+
+parser code{:
+
+
+       
+
+        public void syntax_error(Symbol s){
+            System.out.println("Error en la Linea " + (s.left) +" Columna "+s.right+ " Identificador '" +s.value + " 'no reconocido." );
+	 }
+
+        public void unrecovered_syntax_error(Symbol s)throws Exception{
+            System.out.println("\n Error Sintactico "+s);
+        }
+
+        public void report_error(String message, Object info){
+            //System.out.println(message);
+            //Symbol s=(Symbol)info;
+            //System.out.println(s.value);
+        }
+
+
+:};
+
+init with {: 
+   
+:};
+
+action code
+	{:
+            
+
+
+
+	:};
+
+terminal String Punto;
+terminal String Bin;
+
+non terminal String S,L;
+non terminal Data T;
+
+start with 	S;
+
+S::=L:a
+    {:
+        System.out.println("Resultado:"+a.toString());
+    :}
+;
+
+L::=T:a Punto T:b
+    {:
+        b.Posicion=b.Posicion*2;
+        float Temp=(float)b.Valor/(float)b.Posicion;
+        Temp=Temp+a.Valor;
+        System.out.println(Temp);
+        RESULT=Float.toString(Temp);
+    :}
+    |T:a
+    {:
+        RESULT=String.valueOf(a.Valor);
+    :}
+;
+
+T::=T:a Bin:b
+    {:
+        a.Posicion=a.Posicion*2;
+        a.Valor=a.Valor*2+Integer.parseInt(b);
+        RESULT=a;
+    :}
+    |Bin:a
+    {:
+        Data N=new Data(Integer.parseInt(a),1);
+        RESULT=N;
+    :}
+;
