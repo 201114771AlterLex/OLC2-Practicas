@@ -1,0 +1,10 @@
+PRight=1
+PLeft=2
+Minus=3
+Colon=4
+Numbers=5
+Whitespace=6
+'('=1
+')'=2
+'-'=3
+','=4
