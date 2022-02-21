@@ -1,0 +1,8 @@
+Point=1
+Colon=2
+Hex=3
+Number=4
+Letter=5
+Whitespace=6
+'.'=1
+','=2
