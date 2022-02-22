@@ -1,0 +1,13 @@
+PRight=1
+PLeft=2
+Plus=3
+Times=4
+Point=5
+Numbers=6
+Decimal=7
+Whitespace=8
+')'=1
+'('=2
+'+'=3
+'*'=4
+'.'=5
